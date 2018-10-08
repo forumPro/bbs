@@ -37,11 +37,18 @@ def read_post(request):
     post = Post.objects.get(pk=post_id)
     return render(request,'read_post.html',{'post':post})
 
+
+
 def delete_post(request):
-    return render(request,'delete_post.html',{})
+    post_id = int(request.GET.get('post_id'))
+    Post.objects.get(pk=post_id).delete()
+    return redirect('/')
 
 def post_list(request):
-    return render(request,'post_list.html',{})
+    posts = Post.objects.all()
+    return render(request,'post_list.html',{'posts':posts})
 
 def search(request):
-    return render(request,'search.html',{})
+    keyword = request.POST.get('keyword')
+    posts =  Post.objects.filter(content__contains=keyword)
+    return render(request,'search.html',{'posts':posts})

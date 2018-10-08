@@ -12,4 +12,4 @@ class Post(models.Model):
     content = models.TextField()
 
     # class Meta:
-    #     ordering = ['-updated']
+    #     ordering = ['-created']
